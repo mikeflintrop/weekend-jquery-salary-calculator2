@@ -2,7 +2,6 @@ $(onReady);
 
 function onReady() {
     $('#submit-btn').on('click', addEmployee);
-    $('.employeesOutput').on('click', '#delete-btn', deleteEmployee);
 } //end onReady
 
 // create employee arrary
@@ -10,48 +9,93 @@ let employeeArray = [];
 
 function addEmployee() {
     // console function
-    console.log('addEmployee');
+    console.log('addEmployee button clicked');
+
     // get input variables
     let firstName=$('#firstName').val();
     let lastName=$('#lastName').val();
     let idNumber=$('#idNumber').val();
     let title=$('#jobTitle').val();
     let salary=$('#salary').val();
+
     // create employee object
-    let employeeAdded={firstName, lastName, idNumber, title, salary};
+    let newEmployee={firstName, lastName, idNumber, title, salary};
+
     // console employee object
-    console.log(employeeAdded);
+    console.log(newEmployee);
+
+    // push employee object to employee array
+    (employeeArray).push(newEmployee);
+
     // append employee tableOutput
-    $('.employessOutput').append(
-        `<td>${firstName}</td>
+    $('.salary-table').append(
+        `<tr class="employeesOutput">
+        <td>${firstName}</td>
         <td>${lastName}</td>
         <td>${idNumber}</td>
         <td>${title}</td>
         <td>${salary}</td>
-        <td><button class="delete-btn">DELETE</button></td>`
+        <td id="${idNumber}"></td>
+        </tr>`
     )
+    // add button to last cell
+    $(`#${idNumber}`).append(
+        `<button class="delete-btn">DELETE</button>`
+    ).on('click', deleteEmployee)
+
     // empty input fields
     $('#firstName').val('');
     $('#lastName').val('');
     $('#idNumber').val('');
     $('#jobTitle').val('');
     $('#salary').val('');
-    // push employee object to employee array
-    (employeeArray).push(employeeAdded);
+
     // console array
     console.log(employeeArray);
+    // call calculate function
+    calculateMonthly();
+} // end addEmployee
 
-    // calculateMonthly();
-}
+function deleteEmployeeRow() {
+    // console function
+    console.log('deleteEmployee button clicked');
 
-function deleteEmployee() {
-    console.log("in deleteEmployee", $(this).parent());
-    $(this).parent().remove();
-    // deleteEmployeeButton
-    el.append(`
-    <>
-    ${thisEmployee.firstName} ${thisEmployee.lastName} ${thisEmployee.employeeId}
-${thisEmployee.title} ${thisEmployee.salary} <button class="deleteEmployeeButton">Delete</button>
-    </li>
-    `);
-  } // delete employees
+    // declare const
+    const buttonCell = $(this)
+    console.log(buttonCell)
+    // declare const
+    const cellId = buttonCell.attr("id")
+    console.log(cellId)
+    // remove employee from employeeArray
+    removeEmployee();
+    // remove row from UI
+    buttonCell.closest('tr').remove();
+    // calc monthly total
+    calculateMonthly();
+} // end deleteEmployee
+
+function calculateMonthly() {
+    // declare variable
+    let totalSalary = 0;
+    for(let i = 0; i < employeeArray.length; i ++) {
+        totalSalary += Number(employeeArray[i].salary) 
+    }
+    totalSalary = (totalSalary/12);
+    // empty and append id
+    $('#totalMonthlyOutput').empty();
+    $('#totalMonthlyOutput').append(totalSalary);
+    turnRed();
+    // creat function to turn red
+    function turnRed() {
+        if(totalSalary >= 20000){
+            $('#totalMonthlyOutput').addClass(`turnRed`);
+        }
+    }
+} // end calculateMonthly
+
+function removeEmployee() {
+    // console function
+    console.log('removeEmployee done');
+    
+
+} // end removeEmployee
