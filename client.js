@@ -41,7 +41,7 @@ function addEmployee() {
     // add button to last cell
     $(`#${idNumber}`).append(
         `<button class="delete-btn">DELETE</button>`
-    ).on('click', deleteEmployee)
+    ).on('click', deleteEmployeeRow)
 
     // empty input fields
     $('#firstName').val('');
@@ -66,6 +66,18 @@ function deleteEmployeeRow() {
     // declare const
     const cellId = buttonCell.attr("id")
     console.log(cellId)
+    // function to remove employee object from array
+    function removeEmployee() {
+        // console function
+        console.log('removeEmployee done');
+        // loop over employee array
+        for (let i = 0; i < employeeArray.length; i++) {
+            if (employeeArray[i].idNumber == cellId) {
+                employeeArray.splice(i, 1);
+                console.log(employeeArray);
+            }
+        }
+    } // end removeEmployee
     // remove employee from employeeArray
     removeEmployee();
     // remove row from UI
@@ -92,10 +104,3 @@ function calculateMonthly() {
         }
     }
 } // end calculateMonthly
-
-function removeEmployee() {
-    // console function
-    console.log('removeEmployee done');
-    
-
-} // end removeEmployee
