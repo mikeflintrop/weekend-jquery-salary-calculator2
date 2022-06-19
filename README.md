@@ -18,10 +18,11 @@ NONE
 
 ## How does someone use this application?
 
-1. Fill out each 'Add Employee' input field.
-2. When you are finished, click the Submit button.
-3. You will see your employee and the total monthly calculated salary displayed on the page.
-4. Click each correlated Delete button to remove an employee from the list of employees and remove their salary from the total monthly calculated salary.
+1. Open the index.html file in browser of your choice.
+2. Fill out each 'Add Employee' input field.
+3. When you are finished, click the Submit button.
+4. You will see your employee and the total monthly calculated salary displayed on the page.
+5. Click each correlated Delete button to remove an employee from the list of employees and remove their salary from the total monthly calculated salary.
 
 ## Built With
 
