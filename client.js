@@ -72,7 +72,7 @@ function deleteEmployeeRow() {
         console.log('removeEmployee done');
         // loop over employee array
         for (let i = 0; i < employeeArray.length; i++) {
-            if (employeeArray[i].idNumber == cellId) {
+            if (employeeArray[i].idNumber === cellId) {
                 employeeArray.splice(i, 1);
                 console.log(employeeArray);
             }
@@ -96,11 +96,14 @@ function calculateMonthly() {
     // empty and append id
     $('#totalMonthlyOutput').empty();
     $('#totalMonthlyOutput').append(totalSalary);
-    turnRed();
+
     // creat function to turn red
     function turnRed() {
         if(totalSalary >= 20000){
             $('#totalMonthlyOutput').addClass(`turnRed`);
+        } else {
+            $('#totalMonthlyOutput').removeClass(`turnRed`);
         }
     }
+    turnRed();
 } // end calculateMonthly
