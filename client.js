@@ -89,21 +89,23 @@ function deleteEmployeeRow() {
 function calculateMonthly() {
     // declare variable
     let totalSalary = 0;
+    // loop over array
     for(let i = 0; i < employeeArray.length; i ++) {
         totalSalary += Number(employeeArray[i].salary) 
     }
-    totalSalary = (totalSalary/12);
+    // divide to get monthly total
+    totalSalary = Math.round((totalSalary/12));
     // empty and append id
     $('#totalMonthlyOutput').empty();
     $('#totalMonthlyOutput').append(totalSalary);
 
-    // creat function to turn red
+    // create function to turn red
     function turnRed() {
         if(totalSalary >= 20000){
             $('#totalMonthlyOutput').addClass(`turnRed`);
         } else {
             $('#totalMonthlyOutput').removeClass(`turnRed`);
         }
-    }
+    } // end turnRed 
     turnRed();
 } // end calculateMonthly
